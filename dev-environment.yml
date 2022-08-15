@@ -1,0 +1,17 @@
+name: my-model-dev
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - click
+  - pydantic # until lume-services registered with conda
+  - lume-model=1.4 # until lume-services registered with conda
+  - pip 
+  - pip: 
+    - git+https://github.com/jacquelinegarrahan/lume-services.git
+
+  # dev
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - jupyterlab
