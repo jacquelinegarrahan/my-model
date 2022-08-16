@@ -1,2 +1,5 @@
 click
 lume-services
+numpy
+prefect<2
+prefect[viz]

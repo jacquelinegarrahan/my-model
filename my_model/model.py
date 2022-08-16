@@ -1,5 +1,6 @@
 import copy
 from typing import Dict
+import numpy
 from lume_model.models import BaseModel
 from lume_model.variables import InputVariable, OutputVariable
 
@@ -18,7 +19,7 @@ class MyModel(BaseModel):
         data files, etc.
         
         """
-        super(self).__init__()
+        super().__init__()
 
         # handle settings if any
         # if settings_kwargs is not None:
@@ -40,6 +41,11 @@ class MyModel(BaseModel):
 
         """
 
-        ...
-
+        self.output_variables["output1"].value = numpy.random.uniform(
+        input_variables["input1"].value,  # lower dist bound
+        input_variables["input2"].value,  # upper dist bound
+            (50, 50),
+        )
+        self.output_variables["output2"].value = input_variables["input1"].value
+        self.output_variables["output3"].value = input_variables["input2"].value
         return self.output_variables

@@ -1,1 +1,2 @@
-recursive-include my_model/files *
+recursive-include my_model/files *include versioneer.py
+include my_model/_version.py

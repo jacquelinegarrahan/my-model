@@ -20,72 +20,10 @@ from prefect.storage import Module
 from my_model.model import MyModel
 from my_model import INPUT_VARIABLES
 
-
-@task(log_stdout=True)
-def preprocessing_task(input_variables, misc_settings):
-    """If additional preprocessing of input variables are required, process the
-    variables here. This task is flexible and can absorb other misc settings passed
-    as parameters to the flow.
-
-    Examples:
-        Suppose we have a preprocessing step where we want to scale all values by some
-        multiplier. This task would look like:
-
-        ```python
-
-        @task(log_stdout=True)
-        def preprocessing_task(input_variables, multiplier):
-            for var_name in input_variables.keys():
-                input_variables[var_name].value = input_variables[var_name].value
-                                                        * multiplier
-
-        ```
-
-    """
-    ...
-
-
 @task(log_stdout=True)
 def format_file(output_variables):
-    """Task used for organizing an file object. The formatted object must be
-    serializable by the file_type passed in the SaveFile task call.
-    See https://slaclab.github.io/lume-services/services/files/ for more information
-    about interacting with file objects and file systems
-
-    Examples:
-        Suppose we have a workflow with two results `text1` and `text2`. We'd like to
-        concatenate the text and save in a text file. This would look like:
-        ```python
-
-        @task(log_stdout=True)
-        def format_file(output_variables):
-            text = output_variables["text1"].value + output_variables["text2"].value
-
-        save_file_task = SaveFile()
-
-        with Flow("my-flow") as flow:
-
-            ... # set up params, evaluate, etc.
-
-            output_variables = evaluate(formatted_input_variables)
-            text = format_file(output_variables)
-
-            file_parameters = save_file_task.parameters
-
-            # save file
-            my_file = save_file_task(
-                text,
-                filename = file_parameters["filename"],
-                filesystem_identifier = file_parameters["filesystem_identifier"],
-                file_type = TextFile # THIS MUST BE PASSED IN THE TASK CALL
-            )
-
-        ```
-
-    """
-    obj = ...
-    return obj
-
+    text = str(output_variables["output2"].value + output_variables["output3"].value)
+    return text
 
 @task(log_stdout=True)
 def format_result(
@@ -125,7 +63,7 @@ def evaluate(formatted_input_vars, settings=None):
 
     model = MyModel(**settings)
 
-    return model.execute(formatted_input_vars)
+    return model.evaluate(formatted_input_vars)
 
 
 # DEFINE TASK FOR SAVING DB RESULT
@@ -149,7 +87,7 @@ with Flow("my-model", storage=Module(__name__)) as flow:
 
     # CONFIGURE LUME-SERVICES
     # see https://slaclab.github.io/lume-services/workflows/#configuring-flows-for-use-with-lume-services
-    configure_lume_services()
+    configure = configure_lume_services()
 
     # CHECK WHETHER THE FLOW IS RUNNING LOCALLY
     # If the flow runs using a local backend, the results service will not be available
@@ -216,6 +154,8 @@ with Flow("my-model", storage=Module(__name__)) as flow:
     file_parameters = save_file_task.parameters
     saved_file_rep = save_file_task(file_data, file_type=TextFile, **file_parameters)
 
+    saved_file_rep.set_upstream(configure)
+
     # SAVE RESULTS TO RESULTS DATABASE, requires LUME-services results backend 
     with case(running_local, False):
         # CREATE LUME-services Result object
@@ -225,6 +165,7 @@ with Flow("my-model", storage=Module(__name__)) as flow:
 
         # RUN DATABASE_SAVE_TASK
         saved_model_rep = save_db_result_task(formatted_result)
+        saved_model_rep.set_upstream(configure)
 
 
 def get_flow():
