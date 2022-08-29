@@ -26,6 +26,5 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ${{ steps.sdist.outputs.filename }}
         tag: ${{ github.ref }}
-      
         overwrite: true
         file_glob: true
