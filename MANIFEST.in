@@ -2,3 +2,7 @@ recursive-include my_model/files *
 include environment.yml
 include versioneer.py
 include my_model/_version.py
+include README.md
+include LICENSE
+include requirements.txt
+include setup.py
