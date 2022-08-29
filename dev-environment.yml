@@ -2,9 +2,11 @@ name: my-model-dev
 channels:
   - conda-forge
 dependencies:
+  - python=3.9
   - click
-  - pydantic # until lume-services registered with conda
-  - lume-model>=1.4 # until lume-services registered with conda
+  - pydantic
+  - lume-model=1.4 
+  - numpy
   - prefect[viz]<2.0
   - pip 
   - pip: 
