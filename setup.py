@@ -8,11 +8,6 @@ cur_dir = path.abspath(path.dirname(__file__))
 with open(path.join(cur_dir, "requirements.txt"), "r") as f:
     requirements = f.read().split()
 
-# set up additional dev requirements
-dev_requirements = []
-with open(path.join(cur_dir, "dev-requirements.txt"), "r") as f:
-    dev_requirements = f.read().split()
-
 setup(
     name="my_model",
     author="Jacqueline Garrahan",
@@ -21,7 +16,6 @@ setup(
     packages=find_packages(),
     #  license="...",
     install_requires=requirements,
-    extras_require={"dev": dev_requirements},
     url="https://github.com/jacquelinegarrahan/my-model",
     include_package_data=True,
     python_requires=">=3.8",
