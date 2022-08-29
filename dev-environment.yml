@@ -10,7 +10,7 @@ dependencies:
   - prefect[viz]<2.0
   - pip 
   - pip: 
-    - git+https://github.com/jacquelinegarrahan/lume-services.git
+    - https://github.com/jacquelinegarrahan/lume-services/releases/download/v0.0.4/lume-services-0.0.4.tar.gz
 
   # dev
   - pre-commit
