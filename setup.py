@@ -22,9 +22,9 @@ setup(
     entry_points={
         "orchestration": [
             "my_model.model=\
-                my_model.model:MyModel",
+                my_model.model.MyModel",
             "my_model.flow=\
-                my_model.flow:get_flow",
+                my_model.flow.get_flow",
         ],
         "console_scripts": [
             "plot-flow=my_model.scripts.plot:main"
