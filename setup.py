@@ -22,15 +22,9 @@ setup(
     entry_points={
         "orchestration": [
             "my_model.model=\
-                my_model.model.MyModel",
+                my_model.model:MyModel",
             "my_model.flow=\
-                my_model.flow.flow",
-            "my_model.result=\
-                lume_services.results.Result"
-
-        ],
-        "console_scripts": [
-            "plot-flow=my_model.scripts.plot:main"
+                my_model.flow:flow",
         ],
     },
 )
