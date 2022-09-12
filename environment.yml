@@ -7,4 +7,4 @@ dependencies:
   - numpy
   - pip 
   - pip: 
-    - https://github.com/jacquelinegarrahan/lume-services/releases/download/v0.0.4/lume-services-0.0.4.tar.gz
+    - https://github.com/jacquelinegarrahan/lume-services/releases/download/v0.0.6/lume-services-0.0.6.tar.gz
