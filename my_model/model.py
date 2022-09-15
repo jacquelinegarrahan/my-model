@@ -2,7 +2,7 @@ import copy
 from typing import Dict
 from lume_model.models import BaseModel
 from lume_model.variables import InputVariable, OutputVariable
-
+import numpy as np
 from my_model import INPUT_VARIABLES, OUTPUT_VARIABLES
 
 
