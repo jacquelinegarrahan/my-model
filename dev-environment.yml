@@ -6,6 +6,7 @@ dependencies:
   - pydantic # until lume-services registered with conda
   - lume-model>=1.4 # until lume-services registered with conda
   - prefect[viz]<2.0
+  - numpy
   - pip 
   - pip: 
     - git+https://github.com/jacquelinegarrahan/lume-services.git

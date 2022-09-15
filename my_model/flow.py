@@ -20,29 +20,10 @@ from prefect.storage import Module
 from my_model.model import MyModel
 from my_model import INPUT_VARIABLES
 
-
 @task(log_stdout=True)
-def preprocessing_task(input_variables, misc_settings):
-    """If additional preprocessing of input variables are required, process the
-    variables here. This task is flexible and can absorb other misc settings passed
-    as parameters to the flow.
-
-    Examples:
-        Suppose we have a preprocessing step where we want to scale all values by some
-        multiplier. This task would look like:
-
-        ```python
-
-        @task(log_stdout=True)
-        def preprocessing_task(input_variables, multiplier):
-            for var_name in input_variables.keys():
-                input_variables[var_name].value = input_variables[var_name].value
-                                                        * multiplier
-
-        ```
-
-    """
-    ...
+def format_file(output_variables):
+    text = str(output_variables["output2"].value + output_variables["output3"].value)
+    return text
 
 
 @task(log_stdout=True)

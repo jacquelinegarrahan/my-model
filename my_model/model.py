@@ -24,6 +24,7 @@ class MyModel(BaseModel):
         # if settings_kwargs is not None:
         # ...
 
+
     def evaluate(
         self, input_variables: Dict[str, InputVariable]
     ) -> Dict[str, OutputVariable]:
@@ -40,6 +41,13 @@ class MyModel(BaseModel):
 
         """
 
-        ...
+        self.output_variables["output1"].value = np.random.uniform(
+            input_variables["input1"].value,  # lower dist bound
+            input_variables["input2"].value,  # upper dist bound
+            (50, 50),
+        )
+        self.output_variables["output2"].value = input_variables["input1"].value
+        self.output_variables["output3"].value = input_variables["input2"].value
+
 
         return self.output_variables
