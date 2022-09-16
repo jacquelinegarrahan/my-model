@@ -17,16 +17,10 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           python-version: 3.9 # this is pinned in dev-environment file
-          mamba-version: "*"
+          mamba-version: ${{ matrix.python-version }}
           channels: conda-forge
           activate-environment: my-model-dev
           environment-file: dev-environment.yml
-      
-      - name: Install matrix python
-        shell: bash -l {0}
-        run: |
-          conda install python=${{ matrix.python-version }}
-        
 
       - name: Install my_model
         shell: bash -l {0}
