@@ -18,7 +18,7 @@ setup(
     install_requires=requirements,
     url="https://github.com/jacquelinegarrahan/my-model",
     include_package_data=True,
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     entry_points={
         "orchestration": [
             "my_model.model=\
